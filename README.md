@@ -1,7 +1,9 @@
 # DisplayPi
 
 Clone this repository to your Pi:
+``` 
 git clone https://github.com/devrema/DisplayPi.git
+``` 
 
 
 ## Usage:
