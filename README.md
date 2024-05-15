@@ -7,7 +7,7 @@ git clone https://github.com/devrema/DisplayPi.git
 ## Usage:
 
 make sure that the OLED display is connected.
-you can test that by
+you can test that by:
 ```
 i2cdetect -y 1
 ```
@@ -18,7 +18,11 @@ Be careful with the display, as it can easily be damaged.
 ### Before executing:
 
 Make sure to cofigure the path to your fonts in the script.
-Use nano /path/to/Display.py for configuration.
+Use:
+```
+nano /path/to/Display.py
+``` 
+for configuration.
 You can use:
 ``` 
 font_path = None
@@ -43,7 +47,7 @@ Use
 sudo crontab -e
 ```
 
-select 1 for nano editor, if you open for first time
+select 1 for nano editor, if you open it for the first time.
 
 Add:
 
