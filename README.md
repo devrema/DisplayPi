@@ -24,20 +24,28 @@ nano /path/to/Display.py
 ``` 
 for configuration.
 You can use:
-``` 
+```python
 font_path = None
 ```
 if no fonts are installed.
 
-Be also sure to use the right driver. I use sh1106. This might not be the right option for your purpose.
+Be also sure that the right drivers are being used. I use sh1106. This might not be the right option for your Display.
 You should also reconfigure this as well, if you have rendering issues.
 
+You might as well install dependencies on your Pi.
+``` 
+sudo apt update
+sudo apt install python3-pip
+``` 
+``` 
+pip install <package-name>
+``` 
 
 ### use the command:
-
 ```
 python3 /path/to/Display.py
 ```
+For execution
 
 
 ## Automation
