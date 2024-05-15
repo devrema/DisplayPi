@@ -24,8 +24,9 @@ Use:
 ```
 nano /path/to/Display.py
 ``` 
-for configuration.
-You can use:
+for configuration. 
+
+#### You can use:
 ```python
 font_path = None
 ```
@@ -42,17 +43,16 @@ sudo apt install python3-pip
 ``` 
 pip install <package-name>
 ``` 
-
+## Execute 
 ### use the command:
 ```
 python3 /path/to/Display.py
 ```
 For execution
 
-
 ## Automation
 
-Use 
+Use:
 ```
 sudo crontab -e
 ```
