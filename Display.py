@@ -13,6 +13,7 @@ device = sh1106(serial)
 # Laden einer Schriftart
 font_size  = 12
 font_path = "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf"  # Pfad zur Schriftartdatei
+#font_path = None
 font = ImageFont.truetype(font_path, font_size)
 
 # Funktion zur Anzeige der IP-Adresse und des Verbindungstyps
@@ -34,12 +35,19 @@ def get_disk_usage():
     disk_usage = disk.percent
     return disk_usage
 
-# Funktion zur Anzeige der CPU-Auslastung und Temperatur
-def get_cpu_usage_and_temp():
+# Funktion zur Anzeige der CPU-Auslastung
+def get_cpu_usage():
     cpu_usage = psutil.cpu_percent()
-    cpu_temp = psutil
+    return cpu_usage
 
-    # Funktion zur Anzeige der RAM-Auslastung
+# Funktion zur Anzeige der CPU-Temperatur
+def get_cpu_temp():
+    tempFile = open( "/sys/class/thermal/thermal_zone0/temp" )
+    cpu_temp = tempFile.read()
+    tempFile.close()
+    return round(float(cpu_temp)/1000, 2)
+
+# Funktion zur Anzeige der RAM-Auslastung
 def get_ram_usage():
     ram = psutil.virtual_memory()
     ram_usage = ram.percent
@@ -47,7 +55,9 @@ def get_ram_usage():
 
 def main():
     ip_address, connection_type = get_ip_address()
-    cpu_usage, cpu_temp = get_cpu_usage_and_temp()
+#    cpu_usage, cpu_temp = get_cpu_usage_and_temp()
+    cpu_usage = get_cpu_usage()
+    cpu_temp = get_cpu_temp()
     ram_usage = get_ram_usage()
     disk_usage = get_disk_usage()
 
@@ -59,7 +69,9 @@ def main():
 
     while True:
         new_ip_address, new_connection_type = get_ip_address()
-        new_cpu_usage, new_cpu_temp = get_cpu_usage_and_temp()
+        #new_cpu_usage, new_cpu_temp = get_cpu_usage_and_temp()
+        new_cpu_usage = get_cpu_usage()
+        new_cpu_temp = get_cpu_temp()
         new_ram_usage = get_ram_usage()
         new_disk_usage = get_disk_usage()
 

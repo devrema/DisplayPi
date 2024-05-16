@@ -41,7 +41,7 @@ sudo apt update
 sudo apt install python3-pip
 ``` 
 ``` 
-pip install <package-name>
+pip install luma.core luma.oled psutil
 ``` 
 ## Execute 
 ### use the command:
