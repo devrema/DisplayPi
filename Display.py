@@ -55,7 +55,6 @@ def get_ram_usage():
 
 def main():
     ip_address, connection_type = get_ip_address()
-#    cpu_usage, cpu_temp = get_cpu_usage_and_temp()
     cpu_usage = get_cpu_usage()
     cpu_temp = get_cpu_temp()
     ram_usage = get_ram_usage()
@@ -69,7 +68,6 @@ def main():
 
     while True:
         new_ip_address, new_connection_type = get_ip_address()
-        #new_cpu_usage, new_cpu_temp = get_cpu_usage_and_temp()
         new_cpu_usage = get_cpu_usage()
         new_cpu_temp = get_cpu_temp()
         new_ram_usage = get_ram_usage()
