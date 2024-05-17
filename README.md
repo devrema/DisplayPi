@@ -87,7 +87,8 @@ Dont`t forget the "&"!
 
 ## mind that you might have some issues with this code, since I use this code on my pi 3B+
 
-e.g. most pip installations force you to use a cirtual environment.
+e.g. most pip installations force you to use a virtual environment.
+you might use other ports etc.
 
 
 
