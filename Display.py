@@ -6,6 +6,20 @@ from luma.core.interface.serial import i2c
 from luma.core.render import canvas
 from luma.oled.device import sh1106
 
+
+### initialize other drivers ###
+
+# import board
+# import busio
+# from adafruit_ssd1306 import SSD1306_I2C
+
+# # OLED-Display Initialisierung
+# i2c = busio.I2C(board.SCL, board.SDA)
+# oled_width = 128
+# oled_height = 64
+# device = SSD1306_I2C(oled_width, oled_height, i2c)
+
+
 # OLED-Display Initialisierung
 serial = i2c(port=1, address=0x3C)
 device = sh1106(serial)
@@ -13,16 +27,19 @@ device = sh1106(serial)
 # Laden einer Schriftart
 font_size  = 12
 font_path = "/usr/share/fonts/truetype/noto/NotoSans-Regular.ttf"  # Pfad zur Schriftartdatei
+# font_path = None ##template if you dont have a font installed
 font = ImageFont.truetype(font_path, font_size)
 
 # Funktion zur Anzeige der IP-Adresse und des Verbindungstyps
-def get_ip_address():
+def get_ip_address_and_connection_type():
     try:
-        ip = os.popen('hostname -I').read().split()[0]
-        if os.system("ping -c 1 google.com") == 0:
+        ip = os.popen('hostname -I').read().strip().split()[0]
+        if os.system("ip link show wlan0 | grep 'state UP'") == 0:
+            connection_type = "WLAN"
+        elif os.system("ip link show eth0 | grep 'state UP'") == 0:
             connection_type = "LAN"
         else:
-            connection_type = "WLAN"
+            connection_type = "Unknown"
     except:
         ip = "-.-.-.-"
         connection_type = "Unknown"
@@ -37,16 +54,18 @@ def get_disk_usage():
 # Funktion zur Anzeige der CPU-Auslastung und Temperatur
 def get_cpu_usage_and_temp():
     cpu_usage = psutil.cpu_percent()
-    cpu_temp = psutil
+    temps = psutil.sensors_temperatures()
+    cpu_temp = temps['cpu-thermal'][0].current 
+    return cpu_usage, cpu_temp
 
-    # Funktion zur Anzeige der RAM-Auslastung
+# Funktion zur Anzeige der RAM-Auslastung
 def get_ram_usage():
     ram = psutil.virtual_memory()
     ram_usage = ram.percent
     return ram_usage
 
 def main():
-    ip_address, connection_type = get_ip_address()
+    ip_address, connection_type = get_ip_address_and_connection_type()
     cpu_usage, cpu_temp = get_cpu_usage_and_temp()
     ram_usage = get_ram_usage()
     disk_usage = get_disk_usage()
